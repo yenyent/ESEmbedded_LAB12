@@ -22,6 +22,7 @@ void setup_systick(uint32_t ticks)
 	SET_BIT(SYST_BASE + SYST_CSR_OFFSET, SYST_TICKINT_BIT);
 
 	// enable systick
+	//
 	SET_BIT(SYST_BASE + SYST_CSR_OFFSET, SYST_ENABLE_BIT);
 }
 
