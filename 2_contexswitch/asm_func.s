@@ -19,8 +19,8 @@ start_user:
 .type systick_handler, %function
 .global systick_handler
 systick_handler:
-	//save lr (EXC_RETURN) to main stack
-	??????
+	//save lr (EXC_RETURN)
+	push {lr}
 
 	//save r4-r11 to user stack
 	mrs	r0,	psp
@@ -30,13 +30,11 @@ systick_handler:
 	bl	sw_task
 	//psp of the next task is now in r0
 
-	//restore r4~r11 from stack of the next task
-	??????
-
-	//modify psp
-	??????
+	//load the next task
+	ldmia	r0!,	{r4-r11}
+	msr	psp,	r0
 
 	//restore lr (EXC_RETURN)
-	??????
+	pop {lr}
 
-	bx	lr
+    bx lr
